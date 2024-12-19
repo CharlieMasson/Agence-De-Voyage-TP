@@ -1,5 +1,6 @@
 security:
     role_hierarchy:
+        ROLE_BANNED: []
         ROLE_ADMIN: ROLE_UTILISATEUR
         ROLE_UTILISATEUR: []  # Empty array to indicate no sub-roles.
 
@@ -22,6 +23,8 @@ security:
             security: false
 
         main:
+            user_checker: App\Security\UserChecker
+            
             lazy: true
             provider: app_user_provider
             form_login:
@@ -37,12 +40,14 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }
 
 # Test environment specific settings
 when@test:
     security:
+        always_authenticate_before_granting: true
+        enable_authenticator_manager: false
         password_hashers:
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto

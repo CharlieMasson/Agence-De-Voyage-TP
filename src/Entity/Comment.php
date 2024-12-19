@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
+//use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,14 +20,14 @@ class Comment
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $author = null;
+    private ?User $author = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $postedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?travel $travel = null;
+    private ?Travel $travel = null;
 
     // #[ORM\Column]
     // #[Assert\Range(

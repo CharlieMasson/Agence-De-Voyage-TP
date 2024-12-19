@@ -74,10 +74,12 @@ class AppFixtures extends Fixture
             $hashedPassword = $passwordHasher->hashPassword($user, $password);
             $user->setPassword($hashedPassword);
 
-            // First Pierre is admin
+            // First user is admin, last user is banned
             if ($i === 0) {
                 $user->setRoles(["ROLE_ADMIN"]);
-            } else {
+            } else if ($i === 19) { 
+                $user->setRoles(["ROLE_BANNED", "ROLE_USER"]);
+            } else{
                 $user->setRoles(["ROLE_USER"]);
             }
 

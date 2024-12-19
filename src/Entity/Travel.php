@@ -18,7 +18,7 @@ class Travel
 
     #[ORM\ManyToOne(inversedBy: 'travel')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?country $destination = null;
+    private ?Country $destination = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $startAt = null;
