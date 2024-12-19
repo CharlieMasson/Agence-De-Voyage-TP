@@ -1,0 +1,30 @@
+<nav class="bg-blue-500 text-white w-screen flex flex-col">
+    <div class="font-semibold flex justify-between w-full h-24 px-5 xl:px-12 py-12 items-center">
+        <a class="" href="{{ path('index') }}">
+            <img class="h-10 w-auto" src="{{ asset('images/skub.webp') }}" alt="logo">
+        </a>
+        <!-- Nav Links -->
+        <ul class="hidden lg:flex px-4 mx-auto text-lg lg:text-xl space-x-12">
+            <li><a href="{{ path('index') }}" class="hover:text-grey-200">Accueil</a></li>
+        </ul>
+        <!-- Responsive navbar -->
+        <div class="flex justify-end w-full lg:w-auto gap-5">
+            {% if user %}
+                <p class = "text-lg lg:text-xl"> Bonjour, {{ user.name + " " + user.lastName }}</p>
+            {% else %}
+                <a class = "text-lg lg:text-xl" href="{{path('app_login')}}">Connectez vous</a>
+            {% endif %}
+            <btn class="mobile-burger navbar-burger self-center lg:hidden w-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-grey-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </btn>   
+        </div>
+    </div>
+    <!-- mobile menu -->
+    <div class="mobile-menu hidden lg:hidden">
+        <ul class="flex flex-col text-lg lg:text-xl p-4 gap-2">
+            <li><a href="{{ path('index') }}" class="hover:text-grey-200">Accueil</a></li>
+        </ul>
+    </div>
+</nav>

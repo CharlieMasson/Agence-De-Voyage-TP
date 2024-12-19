@@ -23,6 +23,14 @@ security:
             security: false
 
         main:
+            remember_me:
+                    secret: '%kernel.secret%'
+                    lifetime: 604800
+                    path: /
+                    domain: ~       
+                    secure: auto     
+                    httponly: true      
+
             user_checker: App\Security\UserChecker
             
             lazy: true
