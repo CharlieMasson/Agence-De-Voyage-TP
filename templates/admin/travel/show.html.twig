@@ -1,0 +1,42 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Travel{% endblock %}
+
+{% block body %}
+    <h1>Travel</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ travel.id }}</td>
+            </tr>
+            <tr>
+                <th>StartAt</th>
+                <td>{{ travel.startAt ? travel.startAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EndAt</th>
+                <td>{{ travel.endAt ? travel.endAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ travel.price }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ travel.description }}</td>
+            </tr>
+            <tr>
+                <th>AvailableSpots</th>
+                <td>{{ travel.availableSpots }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_travel_index') }}">back to list</a>
+
+    <a href="{{ path('app_travel_edit', {'id': travel.id}) }}">edit</a>
+
+    {{ include('admin/travel/_delete_form.html.twig') }}
+{% endblock %}

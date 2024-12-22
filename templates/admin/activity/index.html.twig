@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Activity index{% endblock %}
 
@@ -16,11 +16,11 @@
             </tr>
         </thead>
         <tbody>
-        {% for activity in activities %}
+        {% for activity in pagination.items %}
             <tr>
                 <td>{{ activity.id }}</td>
                 <td>{{ activity.name }}</td>
-                <td>{{ activity.description }}</td>
+                <td>{{ activity.description|slice(0, 50) }}{% if activity.description|length > 50 %}[...]{% endif %}</td>
                 <td>{{ activity.location }}</td>
                 <td>
                     <a href="{{ path('app_activity_show', {'id': activity.id}) }}">show</a>
@@ -34,6 +34,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="pagination flex justify-center mt-3 font-bold">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 
     <a href="{{ path('app_activity_new') }}">Create new</a>
 {% endblock %}

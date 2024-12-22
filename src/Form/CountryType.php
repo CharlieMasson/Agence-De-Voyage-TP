@@ -3,7 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Country;
-use App\Entity\language;
+use App\Entity\Currency;
+use App\Entity\Language;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,11 +16,15 @@ class CountryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('currency')
+            ->add('preposition')
             ->add('languages', EntityType::class, [
-                'class' => language::class,
-                'choice_label' => 'id',
+                'class' => Language::class,
+                'choice_label' => 'name',
                 'multiple' => true,
+            ])
+            ->add('currency', EntityType::class, [
+                'class' => Currency::class,
+                'choice_label' => 'name',
             ])
         ;
     }

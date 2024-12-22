@@ -10,15 +10,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
-#[Route('/activity')]
+#[Route('/admin/activity')]
 final class ActivityController extends AbstractController
 {
     #[Route(name: 'app_activity_index', methods: ['GET'])]
-    public function index(ActivityRepository $activityRepository): Response
+    public function index(ActivityRepository $activityRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $queryBuilder = $activityRepository->createQueryBuilder('a')
+        ->orderBy('a.id', 'ASC');
+
+        $pagination = $paginator->paginate(
+            $queryBuilder, 
+            $request->query->getInt('page', 1),
+            10
+        );
+
         return $this->render('admin/activity/index.html.twig', [
-            'activities' => $activityRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 

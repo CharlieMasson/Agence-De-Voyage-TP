@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <section class="flex justify-center flex-col">
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <p class="alert alert-{{ type }}" role="alert">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endfor %}
+        <h1 class="font-bold">Mot de passe perdu</h1>
+        <p>Choisissez votre nouveau mot de passe</p>
+        <form method="POST" class="mt-10 flex justify-center flex-col gap-3">
+            <input disabled id="username" type="text" placeholder="Adresse Email" name="email" value={{ email is not null ? email : "votre email" }}>
+            <input id="password" type="password" placeholder="Nouveau mot de passe" name="password"/>
+            <input  id="repeat-password" type="password" placeholder="Resaisissez votre nouveau mot de passe" name="password_repeat"/>
+
+            <button class="font-bold" type="submit">
+                Changer mon mot de passe
+            </button>
+        </form>
+    </section>
+{% endblock %}

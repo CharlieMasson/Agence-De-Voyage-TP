@@ -1,0 +1,46 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Travel index{% endblock %}
+
+{% block body %}
+    <h1>Travel index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StartAt</th>
+                <th>EndAt</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>AvailableSpots</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for travel in pagination.items %}
+            <tr>
+                <td>{{ travel.id }}</td>
+                <td>{{ travel.startAt ? travel.startAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ travel.endAt ? travel.endAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ travel.price }}</td>
+                <td>{{ travel.description|slice(0, 50) }}{% if travel.description|length > 50 %}[...]{% endif %}</td>
+                <td>{{ travel.availableSpots }}</td>
+                <td>
+                    <a href="{{ path('app_travel_show', {'id': travel.id}) }}">show</a>
+                    <a href="{{ path('app_travel_edit', {'id': travel.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination flex justify-center mt-3 font-bold">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    <a href="{{ path('app_travel_new') }}">Create new</a>
+{% endblock %}

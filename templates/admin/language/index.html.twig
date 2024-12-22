@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Language index{% endblock %}
 
@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for language in languages %}
+        {% for language in pagination.items %}
             <tr>
                 <td>{{ language.id }}</td>
                 <td>{{ language.name }}</td>
@@ -30,6 +30,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="pagination flex justify-center mt-3 font-bold">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 
     <a href="{{ path('app_language_new') }}">Create new</a>
 {% endblock %}

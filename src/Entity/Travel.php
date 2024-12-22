@@ -38,6 +38,9 @@ class Travel
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+    #[ORM\Column]
+    private ?int $availableSpots = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -134,6 +137,18 @@ class Travel
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getAvailableSpots(): ?int
+    {
+        return $this->availableSpots;
+    }
+
+    public function setAvailableSpots(int $availableSpots): static
+    {
+        $this->availableSpots = $availableSpots;
 
         return $this;
     }

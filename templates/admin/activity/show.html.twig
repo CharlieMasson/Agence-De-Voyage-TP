@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Activity{% endblock %}
 
@@ -30,5 +30,5 @@
 
     <a href="{{ path('app_activity_edit', {'id': activity.id}) }}">edit</a>
 
-    {{ include('activity/_delete_form.html.twig') }}
+    {{ include('admin/activity/_delete_form.html.twig') }}
 {% endblock %}

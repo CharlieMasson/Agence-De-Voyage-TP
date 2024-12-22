@@ -28,31 +28,31 @@ class AppFixtures extends Fixture
         $faker = Factory::create();
 
         $countries = [
-            ['name' => 'United States', 'languages' => ['English'], 'currency' => 'US Dollar'],
-            ['name' => 'France', 'languages' => ['French'], 'currency' => 'Euro'],
-            ['name' => 'Spain', 'languages' => ['Spanish'], 'currency' => 'Euro'],
-            ['name' => 'Germany', 'languages' => ['German'], 'currency' => 'Euro'],
-            ['name' => 'Italy', 'languages' => ['Italian'], 'currency' => 'Euro'],
-            ['name' => 'Portugal', 'languages' => ['Portuguese'], 'currency' => 'Euro'],
-            ['name' => 'Russia', 'languages' => ['Russian'], 'currency' => 'Russian Ruble'],
-            ['name' => 'China', 'languages' => ['Chinese'], 'currency' => 'Chinese Yuan'],
-            ['name' => 'Japan', 'languages' => ['Japanese'], 'currency' => 'Japanese Yen'],
-            ['name' => 'Saudi Arabia', 'languages' => ['Arabic'], 'currency' => 'Saudi Riyal'],
-            ['name' => 'South Korea', 'languages' => ['Korean'], 'currency' => 'South Korean Won'],
-            ['name' => 'India', 'languages' => ['Hindi', 'English'], 'currency' => 'Indian Rupee'],
-            ['name' => 'Bangladesh', 'languages' => ['Bengali'], 'currency' => 'Bangladeshi Taka'],
-            ['name' => 'Pakistan', 'languages' => ['Punjabi'], 'currency' => 'Pakistani Rupee'],
-            ['name' => 'Indonesia', 'languages' => ['Javanese'], 'currency' => 'Indonesian Rupiah'],
-            ['name' => 'Brazil', 'languages' => ['Portuguese'], 'currency' => 'Brazilian Real'],
-            ['name' => 'Vietnam', 'languages' => ['Vietnamese'], 'currency' => 'Vietnamese Dong'],
-            ['name' => 'Turkey', 'languages' => ['Turkish'], 'currency' => 'Turkish Lira'],
-            ['name' => 'Mexico', 'languages' => ['Spanish'], 'currency' => 'Mexican Peso'],
-            ['name' => 'Canada', 'languages' => ['English', 'French'], 'currency' => 'Canadian Dollar'],
-            ['name' => 'Australia', 'languages' => ['English'], 'currency' => 'Australian Dollar'],
-            ['name' => 'Argentina', 'languages' => ['Spanish'], 'currency' => 'Argentine Peso'],
-            ['name' => 'Nigeria', 'languages' => ['English'], 'currency' => 'Nigerian Naira'],
-            ['name' => 'Egypt', 'languages' => ['Arabic'], 'currency' => 'Egyptian Pound'],
-            ['name' => 'Switzerland', 'languages' => ['French', 'German', 'Italian'], 'currency' => 'Swiss Franc'],
+            ['name' => 'États-Unis', 'languages' => ['Anglais'], 'currency' => 'Dollar américain', 'preposition' => 'plural'],
+            ['name' => 'France', 'languages' => ['Français'], 'currency' => 'Euro', 'preposition' => 'female'],
+            ['name' => 'Espagne', 'languages' => ['Espagnol'], 'currency' => 'Euro', 'preposition' => 'female'],
+            ['name' => 'Allemagne', 'languages' => ['Allemand'], 'currency' => 'Euro', 'preposition' => 'female'],
+            ['name' => 'Italie', 'languages' => ['Italien'], 'currency' => 'Euro', 'preposition' => 'female'],
+            ['name' => 'Portugal', 'languages' => ['Portugais'], 'currency' => 'Euro', 'preposition' => 'male'],
+            ['name' => 'Russie', 'languages' => ['Russe'], 'currency' => 'Rouble russe', 'preposition' => 'female'],
+            ['name' => 'Chine', 'languages' => ['Chinois'], 'currency' => 'Yuan chinois', 'preposition' => 'female'],
+            ['name' => 'Japon', 'languages' => ['Japonais'], 'currency' => 'Yen japonais', 'preposition' => 'male'],
+            ['name' => 'Arabie Saoudite', 'languages' => ['Arabe'], 'currency' => 'Riyal saoudien', 'preposition' => 'female'],
+            ['name' => 'Corée du Sud', 'languages' => ['Coréen'], 'currency' => 'Won sud-coréen', 'preposition' => 'female'],
+            ['name' => 'Inde', 'languages' => ['Hindî', 'Anglais'], 'currency' => 'Roupie indienne', 'preposition' => 'female'],
+            ['name' => 'Bangladesh', 'languages' => ['Bengali'], 'currency' => 'Taka bangladais', 'preposition' => 'male'],
+            ['name' => 'Pakistan', 'languages' => ['Panjabi'], 'currency' => 'Roupie pakistanaise', 'preposition' => 'male'],
+            ['name' => 'Indonésie', 'languages' => ['Javanais'], 'currency' => 'Roupie indonésienne', 'preposition' => 'female'],
+            ['name' => 'Brésil', 'languages' => ['Portugais'], 'currency' => 'Real brésilien', 'preposition' => 'male'],
+            ['name' => 'Vietnam', 'languages' => ['Vietnamien'], 'currency' => 'Dong vietnamien', 'preposition' => 'male'],
+            ['name' => 'Turquie', 'languages' => ['Turc'], 'currency' => 'Lira turque', 'preposition' => 'female'],
+            ['name' => 'Mexique', 'languages' => ['Espagnol'], 'currency' => 'Peso mexicain', 'preposition' => 'male'],
+            ['name' => 'Canada', 'languages' => ['Anglais', 'Français'], 'currency' => 'Dollar canadien', 'preposition' => 'male'],
+            ['name' => 'Australie', 'languages' => ['Anglais'], 'currency' => 'Dollar australien', 'preposition' => 'female'],
+            ['name' => 'Argentine', 'languages' => ['Espagnol'], 'currency' => 'Peso argentin', 'preposition' => 'female'],
+            ['name' => 'Nigéria', 'languages' => ['Anglais'], 'currency' => 'Naira nigérian', 'preposition' => 'male'],
+            ['name' => 'Égypte', 'languages' => ['Arabe'], 'currency' => 'Livre égyptienne', 'preposition' => 'female'],
+            ['name' => 'Suisse', 'languages' => ['Français', 'Allemand', 'Italien'], 'currency' => 'Franc suisse', 'preposition' => 'female'],
         ];
 
         $this->createUsers($manager, $this->passwordHasher, $faker);
@@ -74,10 +74,12 @@ class AppFixtures extends Fixture
             $hashedPassword = $passwordHasher->hashPassword($user, $password);
             $user->setPassword($hashedPassword);
 
-            // First user is admin, last user is banned
+            // First user is super admin, second normal admin, last user is banned
             if ($i === 0) {
+                $user->setRoles(["ROLE_SUPER_ADMIN"]);
+            } else if ($i === 1){
                 $user->setRoles(["ROLE_ADMIN"]);
-            } else if ($i === 19) { 
+            }else if ($i === 19) { 
                 $user->setRoles(["ROLE_BANNED", "ROLE_USER"]);
             } else{
                 $user->setRoles(["ROLE_USER"]);
@@ -93,7 +95,7 @@ class AppFixtures extends Fixture
     {
         foreach ($countries as $element) {
             $country = new Country();
-            $country->setName($element['name']);
+            $country->setName($element['name'])->setPreposition($element['preposition']);
 
             // Create or fetch the currency
             $currency = $this->findOrCreateCurrency($manager, $element['currency']);
@@ -145,7 +147,8 @@ class AppFixtures extends Fixture
                        ->setStartAt($startAt)
                        ->setEndAt($endAt)
                        ->setDescription($faker->paragraphs(3, true))
-                       ->setPrice($faker->randomFloat(2, 100, 10000));
+                       ->setPrice($faker->randomFloat(2, 100, 10000))
+                       ->setAvailableSpots(rand(1, 50));
                 $manager->persist($travel);
             }
         }

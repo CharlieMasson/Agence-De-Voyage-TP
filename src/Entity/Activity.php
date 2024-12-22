@@ -22,7 +22,7 @@ class Activity
 
     #[ORM\ManyToOne(inversedBy: 'activities')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?country $country = null;
+    private ?Country $country = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $location = null;

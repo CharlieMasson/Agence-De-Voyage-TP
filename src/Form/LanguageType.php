@@ -17,7 +17,7 @@ class LanguageType extends AbstractType
             ->add('name')
             ->add('countries', EntityType::class, [
                 'class' => Country::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
                 'multiple' => true,
             ])
         ;

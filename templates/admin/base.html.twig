@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Backoffice Admin{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style/style.css" rel="stylesheet">
+    </head>
+    <body class="bg-white">
+        <header>
+            {% block menu %}
+                {% include 'parts/_menu.html.twig' %}
+            {% endblock %}
+        </header>
+        <main class="flex flex-row no-wrap">
+            {% block adminMenu %}
+                {% include 'admin/parts/_admin_menu.html.twig' %}
+            {% endblock %}
+            <div class="mt-10 bg-gray-100 mx-auto w-fit h-min p-16">
+                {% block body %}{% endblock %}
+            </div>
+        </main>
+
+        {% block javascripts %}
+            <script src="{{ asset('js/responsiveMenu.js') }}"></script>
+        {% endblock %}
+
+    </body>
+</html>

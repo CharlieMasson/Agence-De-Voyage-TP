@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <section class="flex justify-center flex-col gap-3">
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <p class="alert alert-{{ type }}" role="alert">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endfor %}
+        <h1 class="font-bold">Mot de passe perdu ?</h1>
+        <form method="POST" class="flex justify-center flex-col gap-3">
+            <input id="email" type="text" placeholder="Adresse Email" name="email"/>
+            <button class="font-bold" type="submit">
+                Recevoir l'email de réinitialisation
+            </button>
+        </form>
+    </section>
+{% endblock %}

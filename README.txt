@@ -1,0 +1,1 @@
+Fixtures dans src/DataFixtures/AppFixtures, tous les comptes on 'test' comme mdp. test_0@example.com est un super admin (ne peut pas être modifié/supprimé), test_1@example.com est un admin et test_19@example.com est banni. Tous les autres comptes créés sont des utilisateurs normaux.

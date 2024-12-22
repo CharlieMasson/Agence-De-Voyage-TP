@@ -8,23 +8,21 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style/style.css" rel="stylesheet">
-        {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
     </head>
-    <body>
+    <body class="bg-white">
         <header>
-            {% block menu %}{% import 'parts/_menu.html.twig' %}{% endblock %}
+            {% block menu %}{% include 'parts/_menu.html.twig' %}{% endblock %}
         </header>
-        <main>
+        <main class="mt-10 bg-gray-100 max-w-6xl mx-auto w-fit p-16">
             {% block body %}{% endblock %}
         </main>
         <footer>
-            {% block footer %}{% import 'parts/_footer.html.twig' %}{% endblock %}
+            {% block footer %}{% include 'parts/_footer.html.twig' %}{% endblock %}
         </footer>
+
+        {% block javascripts %}
+            <script src="{{ asset('js/responsiveMenu.js') }}"></script>
+        {% endblock %}
 
     </body>
 </html>

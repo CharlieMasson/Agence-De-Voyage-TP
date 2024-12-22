@@ -10,15 +10,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
-#[Route('/currency')]
+#[Route('/admin/currency')]
 final class CurrencyController extends AbstractController
 {
     #[Route(name: 'app_currency_index', methods: ['GET'])]
-    public function index(CurrencyRepository $currencyRepository): Response
+    public function index(CurrencyRepository $currencyRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $queryBuilder = $currencyRepository->createQueryBuilder('a')
+        ->orderBy('a.id', 'ASC');
+
+        $pagination = $paginator->paginate(
+            $queryBuilder, 
+            $request->query->getInt('page', 1),
+            10
+        );
+
         return $this->render('admin/currency/index.html.twig', [
-            'currencies' => $currencyRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 

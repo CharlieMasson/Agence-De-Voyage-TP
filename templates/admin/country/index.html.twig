@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Country index{% endblock %}
 
@@ -10,16 +10,16 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Currency</th>
+                <th>Preposition</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for country in countries %}
+        {% for country in pagination.items %}
             <tr>
                 <td>{{ country.id }}</td>
                 <td>{{ country.name }}</td>
-                <td>{{ country.currency }}</td>
+                <td>{{ country.preposition }}</td>
                 <td>
                     <a href="{{ path('app_country_show', {'id': country.id}) }}">show</a>
                     <a href="{{ path('app_country_edit', {'id': country.id}) }}">edit</a>
@@ -32,6 +32,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="pagination flex justify-center mt-3 font-bold">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 
     <a href="{{ path('app_country_new') }}">Create new</a>
 {% endblock %}

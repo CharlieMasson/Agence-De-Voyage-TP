@@ -1,16 +1,24 @@
 <nav class="bg-blue-500 text-white w-screen flex flex-col">
     <div class="font-semibold flex justify-between w-full h-24 px-5 xl:px-12 py-12 items-center">
         <a class="" href="{{ path('index') }}">
-            <img class="h-10 w-auto" src="{{ asset('images/skub.webp') }}" alt="logo">
+            <img class="h-10 w-auto" src="{{ asset('images/logo.jpg') }}" alt="logo">
         </a>
         <!-- Nav Links -->
         <ul class="hidden lg:flex px-4 mx-auto text-lg lg:text-xl space-x-12">
             <li><a href="{{ path('index') }}" class="hover:text-grey-200">Accueil</a></li>
+            <li><a href="{{ path('travel_list') }}" class="hover:text-grey-200">Voyages</a></li>
+            {% if app.user %}
+                <li><a href="{{ path('user_profile') }}" class="hover:text-grey-200">Profile</a></li>
+                {% if 'ROLE_ADMIN' or 'ROLE_SUPER_ADMIN' in app.user.roles %}
+                    <li><a href="{{ path('admin_dashboard') }}" class="hover:text-grey-200">Administration</a></li>
+                {% endif %}
+            {% endif %}
         </ul>
         <!-- Responsive navbar -->
         <div class="flex justify-end w-full lg:w-auto gap-5">
-            {% if user %}
-                <p class = "text-lg lg:text-xl"> Bonjour, {{ user.name + " " + user.lastName }}</p>
+            {% if app.user %}
+                <p class = "text-lg lg:text-xl"> Bonjour, {{ app.user.name ~ " " ~ app.user.familyName }}</p>
+                <a class = "text-lg lg:text-xl" href="{{path('app_logout')}}">Déconnexion</a>
             {% else %}
                 <a class = "text-lg lg:text-xl" href="{{path('app_login')}}">Connectez vous</a>
             {% endif %}
@@ -25,6 +33,13 @@
     <div class="mobile-menu hidden lg:hidden">
         <ul class="flex flex-col text-lg lg:text-xl p-4 gap-2">
             <li><a href="{{ path('index') }}" class="hover:text-grey-200">Accueil</a></li>
+            <li><a href="{{ path('travel_list') }}" class="hover:text-grey-200">Voyages</a></li>
+            {% if app.user %}
+                <li><a href="{{ path('user_profile') }}" class="hover:text-grey-200">Profile</a></li>
+                {% if 'ROLE_ADMIN' or 'ROLE_SUPER_ADMIN' in app.user.roles %}
+                    <li><a href="{{ path('admin_dashboard') }}" class="hover:text-grey-200">Backoffice</a></li>
+                {% endif %}
+            {% endif %}
         </ul>
     </div>
 </nav>

@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Comment;
-use App\Entity\travel;
-use App\Entity\user;
+use App\Entity\Travel;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,12 +20,14 @@ class CommentType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('author', EntityType::class, [
-                'class' => user::class,
-                'choice_label' => 'id',
+                'class' => User::class,
+                'choice_label' => 'email',
             ])
             ->add('travel', EntityType::class, [
-                'class' => travel::class,
-                'choice_label' => 'id',
+                'class' => Travel::class,
+                'choice_label' => function (Travel $travel) {
+                    return $travel->getDestination()->getName() . ' ' . $travel->getStartAt()->format('d/m/Y') . ' (id: ' . $travel->getId() . ')';
+                },
             ])
         ;
     }

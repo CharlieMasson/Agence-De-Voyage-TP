@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Voyages{% endblock %}
+
+{% block body %}
+    <section>
+        <h1 class="text-lg font-bold mb-3">Liste des voyages</h1>
+
+        <div class="flex flex-row flex-wrap gap-8">
+            {% for travel in pagination.items %}
+                <div class="travel-card">
+                    <h2 class="font-bold text-lg">{{ travel.destination.name }}</h2>
+                    <p><strong>Date de début :</strong> {{ travel.startAt|date('d/m/Y') }}</p>
+                    <p><strong>Date de fin :</strong> {{ travel.endAt|date('d/m/Y') }}</p>
+                    <p><strong>Prix :</strong> {{ travel.price }} €</p>
+                    <p><strong>Places disponibles :</strong> {{ travel.availableSpots }}</p>
+                    <a href="{{ path('travel_details', { id: travel.id }) }}" class="underline font-bold">
+                        Voir les détails du voyage
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="pagination flex justify-center mt-3 font-bold">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </section>
+{% endblock %}

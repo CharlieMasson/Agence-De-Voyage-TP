@@ -10,15 +10,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
-#[Route('/country')]
+#[Route('/admin/country')]
 final class CountryController extends AbstractController
 {
     #[Route(name: 'app_country_index', methods: ['GET'])]
-    public function index(CountryRepository $countryRepository): Response
+    public function index(CountryRepository $countryRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $queryBuilder = $countryRepository->createQueryBuilder('a')
+        ->orderBy('a.id', 'ASC');
+
+        $pagination = $paginator->paginate(
+            $queryBuilder, 
+            $request->query->getInt('page', 1),
+            10
+        );
+
         return $this->render('admin/country/index.html.twig', [
-            'countries' => $countryRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 

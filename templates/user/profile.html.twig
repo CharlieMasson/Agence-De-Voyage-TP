@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profile{% endblock %}
+
+{% block body %}
+    <section class="flex flex-col justify-center">
+        <h1>{{ user.name }} {{ user.familyName }}</h1>
+        <p>Email: {{ user.email }}</p>
+        <p>Roles: 
+            {% for role in user.roles %}
+                {{ role }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+    </section>
+{% endblock %}

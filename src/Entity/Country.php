@@ -33,12 +33,15 @@ class Country
     /**
      * @var Collection<int, language>
      */
-    #[ORM\ManyToMany(targetEntity: language::class, inversedBy: 'countries')]
+    #[ORM\ManyToMany(targetEntity: Language::class, inversedBy: 'countries')]
     private Collection $languages;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?currency $currency = null;
+    private ?Currency $currency = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $preposition = null;
 
     public function __construct()
     {
@@ -156,6 +159,18 @@ class Country
     public function setCurrency(?currency $currency): static
     {
         $this->currency = $currency;
+
+        return $this;
+    }
+
+    public function getPreposition(): ?string
+    {
+        return $this->preposition;
+    }
+
+    public function setPreposition(string $preposition): static
+    {
+        $this->preposition = $preposition;
 
         return $this;
     }

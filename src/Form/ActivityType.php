@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Activity;
-use App\Entity\country;
+use App\Entity\Country;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,8 +18,8 @@ class ActivityType extends AbstractType
             ->add('description')
             ->add('location')
             ->add('country', EntityType::class, [
-                'class' => country::class,
-                'choice_label' => 'id',
+                'class' => Country::class,
+                'choice_label' => 'name',
             ])
         ;
     }

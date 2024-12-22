@@ -13,7 +13,6 @@ class CurrencyType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('code')
         ;
     }
 

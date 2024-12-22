@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Comment index{% endblock %}
 
@@ -15,10 +15,12 @@
             </tr>
         </thead>
         <tbody>
-        {% for comment in comments %}
+        {% for comment in pagination.items %}
             <tr>
                 <td>{{ comment.id }}</td>
-                <td>{{ comment.content }}</td>
+                <td>
+                    {{ comment.content|slice(0, 50) }}{% if comment.content|length > 50 %}[...]{% endif %}
+                </td>
                 <td>{{ comment.postedAt ? comment.postedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_comment_show', {'id': comment.id}) }}">show</a>
@@ -32,6 +34,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="pagination flex justify-center mt-3 font-bold">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 
     <a href="{{ path('app_comment_new') }}">Create new</a>
 {% endblock %}

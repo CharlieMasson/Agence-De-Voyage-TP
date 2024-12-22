@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}User{% endblock %}
 
@@ -20,8 +20,16 @@
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
             <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
+                <th>Name</th>
+                <td>{{ user.name }}</td>
+            </tr>
+            <tr>
+                <th>FamilyName</th>
+                <td>{{ user.familyName }}</td>
+            </tr>
+            <tr>
+                <th>ResetToken</th>
+                <td>{{ user.resetToken }}</td>
             </tr>
         </tbody>
     </table>
@@ -30,5 +38,5 @@
 
     <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
 
-    {{ include('user/_delete_form.html.twig') }}
+    {{ include('admin/user/_delete_form.html.twig') }}
 {% endblock %}

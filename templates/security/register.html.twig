@@ -3,27 +3,35 @@
 {% block title %}Register!{% endblock %}
 
 {% block body %}
-    <form method="post">
+    <form method="POST" class="flex justify-center flex-col">
         {% for type, messages in app.flashes %}
             {% for message in messages %}
-                <div class="alert alert-{{ type }}" role="alert">
+                <p class="alert alert-{{ type }}" role="alert">
                     {{ message }}
-                </div>
+                </p>
             {% endfor %}
         {% endfor %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Créer un compte</h1>
-        <label for="username">Votre adresse mail</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-        <label for="password">Votre mot de passe</label>
-        <input type="password" name="_password" id="password" class="form-control" required>
-        <label for="password-confirm">Confirmez votre mot de passe </label>
-        <input type="password" name="_password-confirm" id="password-confirm" class="form-control" required>
+        <h1 class="h3 mb-3 font-weight-normal font-bold">Créer un compte</h1>
 
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('registration') }}"
-        >
-        <button class="btn btn-lg btn-primary" type="submit">
+        <label for="username">Votre adresse mail</label>
+        <input type="email" name="username" id="username" class="form-control" autocomplete="email" required autofocus>
+
+        <label for="name">Votre prénom</label>
+        <input type="text" name="name" id="name" class="form-control" required>
+
+        <label for="family_name">Votre nom de famille</label>
+        <input type="text" name="family-name" id="family-name" class="form-control" required>
+
+        <label for="password">Votre mot de passe</label>
+        <input type="password" name="password" id="password" class="form-control" required>
+
+        <label for="password-confirm">Confirmez votre mot de passe</label>
+        <input type="password" name="password-confirm" id="password-confirm" class="form-control" required>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('registration') }}">
+
+        <button class="btn btn-lg btn-primary font-bold mt-3" type="submit">
             S'inscrire
         </button>
     </form>

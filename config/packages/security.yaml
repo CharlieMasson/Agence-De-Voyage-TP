@@ -2,6 +2,7 @@ security:
     role_hierarchy:
         ROLE_BANNED: []
         ROLE_ADMIN: ROLE_UTILISATEUR
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
         ROLE_UTILISATEUR: []  # Empty array to indicate no sub-roles.
 
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords

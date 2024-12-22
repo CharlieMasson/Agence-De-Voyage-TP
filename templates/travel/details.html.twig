@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du voyage en {{ travel.destination.name }}{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="flex justify-between items-center">
+            <h1 class="font-bold text-lg mb-5">Détails voyage 
+                {% if travel.destination.preposition == 'female' %}
+                    en
+                {% elseif travel.destination.preposition == 'male' %}
+                    au
+                {% elseif travel.destination.preposition == 'plural' %}
+                    aux
+                {% endif %} 
+                {{ travel.destination.name }}
+            </h1>
+            <a href="{{ path('travel_list') }}" class="font-bold">Retour à la liste des voyages</a>
+        </div>
+        
+        <div>
+            <p><strong>Date de départ :</strong> {{ travel.startAt|date('d/m/Y') }}</p>
+            <p><strong>Date de retour :</strong> {{ travel.endAt|date('d/m/Y') }}</p>
+            <p><strong>Prix :</strong> {{ travel.price }} €</p>
+            <p><strong>Places disponibles :</strong> {{ travel.availableSpots }}</p>
+            <p><strong>Description :</strong> {{ travel.description }}</p>
+            <p><strong>Monnaie du pays :</strong> {{ travel.destination.currency.name }}</p>
+            <p><strong>Langue(s) du pays :</strong>
+                {% for language in travel.destination.languages %}
+                    {{ language.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+
+        <div class=" mt-5">
+            <h2 class="font-bold text-lg">Activités disponibles
+                {% if travel.destination.preposition == 'female' %}
+                    en
+                {% elseif travel.destination.preposition == 'male' %}
+                    au
+                {% elseif travel.destination.preposition == 'plural' %}
+                    aux
+                {% endif %} 
+                {{ travel.destination.name }}
+            </h2>
+            {% if travel.destination.activities is not empty %}
+                <ul>
+                    {% for activity in travel.destination.activities %}
+                        <li class="my-3">
+                            <h3><strong>Nom:</strong> {{ activity.name }}</h3>
+                            <p><strong>Lieu :</strong> {{ activity.location }}</p>
+                            <p><strong>Description :</strong> {{ activity.description }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucune activité disponible pour cette destination.</p>
+            {% endif %}
+        </div>
+
+        <section class="mt-5">
+            <h2 class="font-bold text-lg">Commentaires sur ce voyage</h2>
+            {% if sortedComments is not empty %}
+                <ul>
+                    {% for comment in sortedComments %}
+                        <li class="mb-4">
+                            <p><strong>{{ comment.author.name }} {{ comment.author.familyName }}</strong> <small>{{ comment.postedAt|date('d/m/Y H:i') }}</small></p>
+                            <p>{{ comment.content }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucun commentaire pour ce voyage.</p>
+            {% endif %}
+        </section>
+        
+    </section>
+{% endblock %}

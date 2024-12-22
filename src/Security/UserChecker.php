@@ -12,7 +12,7 @@ class UserChecker implements UserCheckerInterface
     public function checkPreAuth(UserInterface $user) : void
     {
         if (in_array('ROLE_BANNED', $user->getRoles())) {
-            throw new CustomUserMessageAuthenticationException("Vous êtes est banni.");
+            throw new CustomUserMessageAuthenticationException("Vous êtes banni.");
         }
     }
 
